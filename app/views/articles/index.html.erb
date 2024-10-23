@@ -1,11 +1,25 @@
-<h1>Articles</h1>
+<div class="container mx-auto px-4 py-8">
+  <h1 class="text-4xl font-bold text-gray-800 mb-8">Rails 8 on Upsun</h1>
 
-<ul>
-  <% @articles.each do |article| %>
-    <li>
-      <a href="<%= article_path(article) %>">
-        <%= article.title %>
-      </a>
-    </li>
+  <h2 class="text-2xl font-semibold text-gray-700 mb-6">Articles</h2>
+
+  <div class="space-y-6">
+    <% @articles.each do |article| %>
+      <div class="bg-white shadow-md rounded-lg p-6 hover:shadow-lg transition duration-300">
+        <h3 class="text-xl font-semibold text-blue-600 hover:text-blue-800">
+          <%= link_to article.title, article_path(article), class: "hover:underline" %>
+        </h3>
+        <% if article.created_at %>
+          <p class="text-sm text-gray-500 mt-2">
+            Published on: <%= article.created_at.strftime("%B %d, %Y") %>
+          </p>
+        <% end %>
+        <%= link_to "Read more", article_path(article), class: "inline-block mt-4 text-blue-600 hover:text-blue-800 hover:underline" %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if @articles.empty? %>
+    <p class="text-lg text-gray-600 mt-8">No articles found.</p>
   <% end %>
-</ul>
+</div>
