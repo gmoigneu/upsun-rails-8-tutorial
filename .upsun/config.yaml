@@ -27,7 +27,7 @@ applications:
     # More information: https://docs.upsun.com/create-apps/app-reference.html#mounts
     mounts:
       "log":
-        source: "tmp"
+        source: "storage"
         source_path: "tmp"
         
       "storage":
@@ -35,7 +35,7 @@ applications:
         source_path: "storage"
         
       "tmp":
-        source: "tmp"
+        source: "storage"
         source_path: "tmp"
         
     # The web key configures the web server running in front of your app.
