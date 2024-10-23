@@ -2,12 +2,13 @@
 applications:
   rails-blog:
     # Application source code directory
-    source:
-      root: "/"
+    stack:
+      - "ruby@3.3"
+      - "nodejs@20"
 
     # The runtime the application uses.
     # Complete list of available runtimes: https://docs.upsun.com/create-apps/app-reference.html#types
-    type: "ruby:3.3"
+    
 
     # Choose which container profile (ratio CPU+RAM) your app will use. Default value comes from the image itself.
     # More information: https://docs.upsun.com/manage-resources/adjust-resources.html#adjust-a-container-profile
@@ -19,7 +20,7 @@ applications:
     # side is in the form `<service name>:<endpoint name>`.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#relationships
     relationships:
-      postgresql:
+      database: "database:postgresql"
       
 
     # Mounts define directories that are writable after the build is complete.
@@ -37,8 +38,6 @@ applications:
         source: "tmp"
         source_path: "tmp"
         
-      
-
     # The web key configures the web server running in front of your app.
     # More information: https://docs.upsun.com/create-apps/app-reference.html#web
     web:
@@ -85,10 +84,6 @@ applications:
     # Outbound firewall rules for the application. More information: https://docs.upsun.com/create-apps/app-reference.html#firewall
     # firewall:
 
-    # Specifies a default set of build tasks to run. Flavors are language-specific.
-    # More information: https://docs.upsun.com/create-apps/app-reference.html#build
-    build:
-      flavor: none
 
     # Installs global dependencies as part of the build process. They’re independent of your app’s dependencies and
     # are available in the PATH during the build process and in the runtime environment. They’re installed before
@@ -114,7 +109,6 @@ applications:
         set -eux
         bundle exec rake db:migrate
         
-
       # The post_deploy hook is run after the app container has been started and after it has started accepting requests.
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#deploy-hook
       # post_deploy: |
@@ -136,7 +130,7 @@ applications:
 # More information: https://docs.upsun.com/add-services.html
 # Full list of available services: https://docs.upsun.com/add-services.html#available-services
 services:
-  postgresql:
+  database:
     type: postgresql:15 # All available versions are: 15, 14, 13, 12, 11
 
   
