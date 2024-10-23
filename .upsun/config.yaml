@@ -4,7 +4,7 @@ applications:
     # Application source code directory
     stack:
       - "ruby@3.3"
-      - "ruby3.3-puma"
+      - "rubyPackages_3_3.puma"
       - "nodejs@20"
 
     # The runtime the application uses.
