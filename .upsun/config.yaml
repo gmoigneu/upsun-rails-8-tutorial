@@ -98,6 +98,7 @@ applications:
       # More information: https://docs.upsun.com/create-apps/hooks/hooks-comparison.html#build-hook
       build: |
         set -eux
+        bundle config set frozen false
         bundle install
         bundle exec rails assets:precompile
         
