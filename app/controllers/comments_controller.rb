@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
   before_action :find_article, only: [:create]
-  
+
   def create
     @comment = @article.comments.build(params[:comment])
     @comment.save!

@@ -6,7 +6,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "create comment" do
-    assert_difference('Comment.count') do
+    assert_difference("Comment.count") do
       post article_comments_path(@article), params: {
         comment: {
           commenter: "Test User",
@@ -22,7 +22,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   test "create comment redirects" do
     post article_comments_path(@article), params: {
       comment: {
-        commenter: "Another User", 
+        commenter: "Another User",
         body: "Really enjoyed reading this"
       }
     }
@@ -32,7 +32,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
 
   test "create comment association" do
     initial_count = @article.comments.count
-    
+
     post article_comments_path(@article), params: {
       comment: {
         commenter: "Article Reader",
