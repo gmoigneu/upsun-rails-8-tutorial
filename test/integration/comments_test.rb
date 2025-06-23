@@ -6,7 +6,7 @@ class CommentsTest < ActionDispatch::IntegrationTest
   end
 
   test "should create comment with valid data" do
-    assert_difference('Comment.count') do
+    assert_difference("Comment.count") do
       post article_comments_path(@article), params: {
         comment: {
           commenter: "Test User",
@@ -14,14 +14,14 @@ class CommentsTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    
+
     assert_redirected_to article_path(@article)
     follow_redirect!
     assert_response :success
   end
 
   test "should not create comment with invalid data" do
-    assert_no_difference('Comment.count') do
+    assert_no_difference("Comment.count") do
       post article_comments_path(@article), params: {
         comment: {
           commenter: "",
@@ -29,7 +29,7 @@ class CommentsTest < ActionDispatch::IntegrationTest
         }
       }
     end
-    
+
     # Should handle validation errors gracefully
     assert_response :success
   end

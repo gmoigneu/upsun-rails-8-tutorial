@@ -68,8 +68,8 @@ created_articles.each do |article|
   comment_count = rand(2..4)
   comment_count.times do
     comment_body = comments_data.sample
-    commenter_names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Henry"]
-    
+    commenter_names = [ "Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Henry" ]
+
     Comment.create!(
       article: article,
       commenter: commenter_names.sample,
