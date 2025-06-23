@@ -1,102 +1,86 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+# Create sample data for the interview challenge
+puts "🌱 Seeding the database..."
 
+# Clear existing data
 Comment.destroy_all
 Article.destroy_all
 
-Article.create(
-    title: "🚂 ☁️ All Aboard the Cloud Rails Express: Why Your Next Project Should Ride These Tracks", 
-    body: "Rails has been chugging along for years, but like a fine wine (or that forgotten leftover code in your Git stash), it just keeps getting better with age. When paired with modern cloud platforms, Rails transforms from a reliable locomotive into a high-speed bullet train of productivity.
-The cloud-Rails combo is like peanut butter and jelly – individually they're good, but together they create something magical. With automatic scaling, your Rails app can handle traffic spikes smoother than your coffee-fueled debugging sessions at 3 AM.
-Deployment in the cloud is so seamless, you'll have more time to argue about tabs vs. spaces or debate whether dark mode should be the only mode. Gone are the days of SSH-ing into servers and praying to the deployment gods – now it's just git push and let the cloud do its thing.
-Remember when scaling meant buying new servers and performing ritual sacrifices to the RAM gods? With Rails in the cloud, scaling is more like adjusting the temperature on your smart thermostat – just slide it up when you need more power, slide it down when you don't.", 
-    comments: [
-        Comment.create(
-            commenter: "Ruby Rockstar", 
-            body: "The PB&J analogy really hits home! I've been using Rails with AWS for the past 2 years and it's exactly like that - two great tastes that taste great together!"
-        ),
-        Comment.create(
-            commenter: "Cloud Ninja", 
-            body: "Love the deployment gods reference 😂 Remember the days of manual Capistrano deploys? So glad those are behind us!"
-        ),
-        Comment.create(
-            commenter: "DevOps Dave", 
-            body: "The scaling comparison to a smart thermostat is spot on. Our team switched to Rails on Heroku last year and haven't looked back since."
-        ),
-        Comment.create(
-            commenter: "Sarah Smith", 
-            body: "This article convinced me to finally make the switch from my self-hosted setup. Currently migrating everything to the cloud!"
-        ),
-        Comment.create(
-            commenter: "Rails Veteran", 
-            body: "Another great benefit is the cost savings on DevOps. No more late-night server maintenance calls!"
-        )
-    ]
-)
+# Create articles with realistic content
+articles_data = [
+  {
+    title: "Getting Started with Rails 8",
+    body: "Rails 8 brings exciting new features including solid queue, solid cache, and improved deployment tools. In this comprehensive guide, we'll explore how to get started with Rails 8 and take advantage of its powerful new capabilities. From setup to deployment, we'll cover everything you need to know to build modern web applications."
+  },
+  {
+    title: "Hotwire and Turbo: The Future of Rails Frontend",
+    body: "Hotwire has revolutionized how we think about building interactive web applications in Rails. With Turbo Frames, Turbo Streams, and Stimulus, you can create rich, responsive user experiences without writing a lot of JavaScript. This article explores best practices and real-world examples of Hotwire in action."
+  },
+  {
+    title: "Database Performance Tips for Rails Applications",
+    body: "As your Rails application grows, database performance becomes crucial. Learn about indexing strategies, query optimization, and how to use tools like bullet gem to identify N+1 queries. We'll also cover advanced topics like database sharding and read replicas for high-traffic applications."
+  },
+  {
+    title: "Building APIs with Rails 8",
+    body: "Rails continues to be an excellent choice for API development. With Rails 8, we have improved tools for building robust, scalable APIs. This guide covers authentication, serialization, versioning, and best practices for API design. Perfect for both REST and GraphQL implementations."
+  },
+  {
+    title: "Testing Strategies for Modern Rails Apps",
+    body: "Testing is essential for maintaining code quality in Rails applications. We'll explore different testing approaches including unit tests, integration tests, and system tests. Learn about factories, mocking, and how to test complex user interactions with Capybara and Selenium."
+  },
+  {
+    title: "Deployment and DevOps for Rails",
+    body: "Deploying Rails applications has never been easier with tools like Kamal and traditional platforms like Heroku. This comprehensive guide covers different deployment strategies, monitoring, logging, and maintaining production Rails applications. Includes Docker best practices and CI/CD setup."
+  },
+  {
+    title: "Rails Security Best Practices",
+    body: "Security should be a top priority in any web application. Rails provides many built-in security features, but you need to know how to use them correctly. This article covers common vulnerabilities, how to prevent them, and tools like Brakeman for security auditing."
+  },
+  {
+    title: "Optimizing Rails Performance",
+    body: "Performance optimization is crucial for user experience and cost efficiency. Learn about caching strategies, background jobs, and how to profile your Rails application. We'll cover tools like New Relic, memory profiling, and techniques for handling high-traffic scenarios."
+  }
+]
 
-Article.create(
-    title: "🎮 🌩️ Level Up Your Game: Rails Cloud Deployment is the Ultimate Power-Up", 
-    body: "Remember playing Super Mario and grabbing that mushroom that made you bigger and stronger? That's exactly what the cloud does for your Rails application, minus the 8-bit sound effects (though we can add those if you really want).
-The cloud platform acts like your game's save state – you can always roll back to a previous deployment if something goes wrong. It's like having infinite lives in a game where the boss is production bugs, and you're armed with the ultimate weapon: rapid rollbacks.
-Your database migrations flow smoother than a speedrunner's perfect playthrough. The cloud handles all the heavy lifting, letting you focus on what really matters: writing beautiful Ruby code and pretending you understand how ActiveRecord really works under the hood.
-With features like auto-scaling and load balancing, your app becomes the final boss that can't be taken down. While your competitors are still trying to configure their servers manually (like playing Doom with a broken keyboard), you're already in the end game.", 
-    comments: [
-        Comment.create(
-            commenter: "Gamer Dev", 
-            body: "As both a gamer and a Rails developer, I absolutely love these analogies! Auto-scaling really is the ultimate power-up!"
-        ),
-        Comment.create(
-            commenter: "Migration Master", 
-            body: "The speedrunner comparison for database migrations made me laugh out loud. Too real! 😅"
-        ),
-        Comment.create(
-            commenter: "Cloud Champion", 
-            body: "Would love to see a follow-up article about boss battles (handling peak traffic) in the cloud!"
-        ),
-        Comment.create(
-            commenter: "Debug Warrior", 
-            body: "The infinite lives through rollbacks is such a perfect analogy. Saved our team multiple times!"
-        ),
-        Comment.create(
-            commenter: "Full Stack Fighter", 
-            body: "Now I can't stop thinking about adding 8-bit sound effects to our deployment pipeline... 🎮"
-        )
-        ]
-)
+# Create articles
+created_articles = []
+articles_data.each do |article_data|
+  article = Article.create!(article_data)
+  created_articles << article
+  puts "✅ Created article: #{article.title}"
+end
 
-Article.create(
-    title: "The Perfect Marriage: Why Rails and Cloud Platforms are a Match Made in Developer Heaven", 
-    body: "If Rails was on a dating app, its profile would read: \"Mature framework seeking cloud platform for long-term deployment relationship. Must love convention over configuration and hate XML.\" And guess what? The cloud swiped right!
-This power couple works together better than pair programming with your rubber duck. The cloud handles all the infrastructure drama while Rails focuses on making your code look good. It's like having a personal assistant for your application – except this one doesn't need coffee breaks.
-Security updates and patches? The cloud platform has your back faster than you can say \"bundle update\". It's like having a bodyguard for your application that also knows how to make a mean cup of coffee and crack decent programming jokes.
-The monitoring tools available in cloud platforms integrate with Rails like they were meant to be together from the start. It's as if DHH himself descended from the Ruby heavens and blessed this union with endless performance graphs and logging capabilities.", 
-    comments: [
-        Comment.create(
-            commenter: "Ruby Romance", 
-            body: "The dating app profile for Rails is hilarious! Though you forgot to mention its love for beautiful code syntax 💝"
-        ),
-        Comment.create(
-            commenter: "Cloud Cupid", 
-            body: "As someone who plays matchmaker between apps and cloud platforms professionally, this article is spot on!"
-        ),
-        Comment.create(
-            commenter: "DHH Fan", 
-            body: "Lost it at 'DHH himself descended from the Ruby heavens' 😂 Great article that really captures the Rails philosophy!"
-        ),
-        Comment.create(
-            commenter: "Infrastructure Idol", 
-            body: "The rubber duck pair programming reference is perfect! My duck approves this article."
-        ),
-        Comment.create(
-            commenter: "Deployment Diva", 
-            body: "Been married to Rails for 5 years now, and the cloud made our relationship even better. Great analogies throughout!"
-        )
-        ]
-)
+# Create comments for each article
+comments_data = [
+  "Great article! This really helped me understand the concepts better.",
+  "Thanks for sharing these insights. Very practical examples.",
+  "I've been looking for exactly this information. Perfect timing!",
+  "Could you expand on the section about deployment? Really interesting stuff.",
+  "This solved a problem I've been struggling with for weeks. Much appreciated!",
+  "Excellent write-up. Looking forward to more content like this.",
+  "Clear and concise explanation. Bookmarked for future reference.",
+  "Any plans for a follow-up article on advanced topics?",
+  "This approach worked perfectly in my project. Thanks!",
+  "Well-structured tutorial. The examples are very helpful."
+]
+
+# Add 2-4 comments per article
+created_articles.each do |article|
+  comment_count = rand(2..4)
+  comment_count.times do
+    comment_body = comments_data.sample
+    commenter_names = ["Alice", "Bob", "Charlie", "Diana", "Eve", "Frank", "Grace", "Henry"]
+    
+    Comment.create!(
+      article: article,
+      commenter: commenter_names.sample,
+      body: comment_body
+    )
+  end
+  puts "💬 Added #{comment_count} comments to '#{article.title}'"
+end
+
+puts ""
+puts "🎉 Seeding completed!"
+puts "📊 Created #{Article.count} articles and #{Comment.count} comments"
+puts ""
+puts "🚀 You can now visit http://localhost:3000 to see the application!"

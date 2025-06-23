@@ -6,4 +6,31 @@ class ArticlesController < ApplicationController
   def show
     @article = Article.find(params[:id])
   end
+  
+  def new
+    @article = Article.new
+  end
+  
+  def create
+    @article = Article.new(article_params)
+    
+    if @article.save
+      redirect_to @article, notice: 'Article was successfully created.'
+    else
+      render :new
+    end
+  end
+  
+  def trending
+    # TODO: Implement trending articles feature
+    # Should show top 5 articles by comment count
+    # INCOMPLETE: This method needs implementation
+    redirect_to root_path, alert: 'Trending feature coming soon!'
+  end
+  
+  private
+  
+  def article_params
+    params.require(:article).permit(:title, :body)
+  end
 end

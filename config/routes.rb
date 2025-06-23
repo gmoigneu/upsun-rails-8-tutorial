@@ -11,7 +11,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "articles#index"
+  
+  # Trending articles route
+  get "trending" => "articles#trending", as: :trending_articles
+  
   resources :articles do
-    resources :comments
+    resources :comments, only: [:create]
   end
 end

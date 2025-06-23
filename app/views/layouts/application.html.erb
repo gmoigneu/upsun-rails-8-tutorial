@@ -23,7 +23,21 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+    <!-- Navigation -->
+    <header class="bg-white shadow-sm border-b">
+      <nav class="container mx-auto px-5 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-8">
+            <%= link_to "Rails Blog", root_path, class: "text-xl font-bold text-gray-900" %>
+            <%= link_to "All Articles", root_path, class: "text-gray-600 hover:text-gray-900" %>
+            <%= link_to "Trending", trending_articles_path, class: "text-gray-600 hover:text-gray-900" %>
+            <%= link_to "New Article", new_article_path, class: "text-gray-600 hover:text-gray-900" %>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container mx-auto mt-8 px-5 flex">
       <%= yield %>
     </main>
   </body>

@@ -1,11 +1,14 @@
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
-
 one:
-  commenter: MyString
-  body: MyText
   article: one
+  commenter: "Alice Johnson"
+  body: "Great article! Very informative."
 
 two:
-  commenter: MyString
-  body: MyText
+  article: one
+  commenter: "Bob Smith"
+  body: "Thanks for sharing this knowledge."
+
+three:
   article: two
+  commenter: "Charlie Brown"
+  body: "This helped me understand the topic better."
