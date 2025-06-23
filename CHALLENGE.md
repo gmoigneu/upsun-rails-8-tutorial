@@ -2,7 +2,9 @@
 
 ## Scenario: Blog Platform Emergency
 
-Welcome to our **1-hour Rails development challenge**! You're stepping in to help fix a blog platform that has some critical issues preventing a major content launch.
+⏰ **TIME STARTS NOW!** You have exactly **60 minutes** to complete this challenge.
+
+You're stepping in to help fix a blog platform that has some critical issues preventing a major content launch.
 
 ### The Situation
 
@@ -14,7 +16,63 @@ Our client's blog platform is scheduled to go live with a major content campaign
 
 ---
 
-## 🚀 Quick Start (5 minutes)
+## ⏰ SPRINT TIMELINE (STRICT DEADLINES)
+
+**Client launch is in 60 minutes. These milestones are EXPECTED:**
+
+| ⏰ Time    | 🎯 Expected Milestone                      | 🚨 Impact if Missed      |
+| ---------- | ------------------------------------------ | ------------------------ |
+| **10 min** | 🔴 Critical bug resolved, comments working | **Launch blocking**      |
+| **35 min** | 🟡 Trending feature live in production     | **Business requirement** |
+| **50 min** | 🟢 All validation issues fixed             | **User experience**      |
+| **60 min** | 📋 Code reviewed, tested, deployment ready | **Go-live ready**        |
+
+---
+
+## 🎯 Your Tasks
+
+### 🔴 **CRITICAL BUG (LAUNCH BLOCKER)**
+
+**⏰ DEADLINE: 10 minutes**
+
+**Problem:** Comment submission is completely broken
+
+- Users can't post comments on articles
+- The form submits but nothing happens
+- Check the logs for errors
+
+**Test:** Try posting a comment on any article
+
+### 🟡 **HIGH PRIORITY FEATURE (BUSINESS CRITICAL)**
+
+**⏰ DEADLINE: 35 minutes**
+
+**Task:** Complete the "Trending Articles" feature
+
+- There's a partially implemented trending system
+- Need to implement the controller action and view
+- Should show articles with the most activity
+- Add it to the navigation
+
+**Acceptance Criteria:**
+
+- Show top articles by activity
+- Display article title and activity metrics
+- Link to the full article
+
+### 🟢 **POLISH & CLEANUP (QUALITY GATE)**
+
+**⏰ DEADLINE: 50 minutes**
+
+**Problem:** Article form validation is too strict
+
+- Current validation prevents useful short content
+- Business wants minimum 10 characters for user content
+- Also fix any other issues you notice
+
+---
+
+## 🚀 Quick Start
 
 ### Prerequisites
 
@@ -38,51 +96,12 @@ open http://localhost:3000
 
 ---
 
-## 🎯 Your Tasks (60 minutes total)
-
-### 🔴 **CRITICAL BUG (Must Fix - 20 minutes)**
-
-**Problem:** Comment submission is completely broken
-
-- Users can't post comments on articles
-- The form submits but nothing happens
-- Check the logs for errors
-
-**Test:** Try posting a comment on any article
-
-### 🟡 **HIGH PRIORITY FEATURE (Should Implement - 25 minutes)**
-
-**Task:** Complete the "Trending Articles" feature
-
-- There's a partially implemented trending system
-- Need to implement the controller action and view
-- Should show articles with the most comments
-- Add it to the navigation
-
-**Acceptance Criteria:**
-
-- Show top 5 articles by comment count
-- Display article title and comment count
-- Link to the full article
-
-### 🟢 **MEDIUM PRIORITY (If Time Allows - 15 minutes)**
-
-**Problem:** Article form validation is too strict
-
-- Current validation prevents useful short articles
-- Business wants minimum 10 characters, not current restriction
-- Also fix any other validation issues you notice
-
----
-
 ## 💬 Communication Guidelines
 
 **This is as important as the code!**
 
 - **Ask questions** if requirements are unclear
-- **Provide progress updates** every 15-20 minutes
-- **Be honest about time estimates**
-- **Explain your approach** before diving into complex changes
+- **Think aloud** before/while diving into complex changes
 
 ### Example Updates:
 
@@ -174,7 +193,3 @@ Remember: **Communication is part of the test!**
 - **Have fun!** This is realistic work you'd do on our team
 
 Good luck! 🍀
-
----
-
-**Questions? Ask now before starting the timer!**
