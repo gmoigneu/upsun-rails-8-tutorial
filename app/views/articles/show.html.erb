@@ -1,32 +1,99 @@
-<div class="container mx-auto px-4 py-8">
-  <h1 class="text-4xl font-bold mb-4"><%= @article.title %></h1>
+<div class="max-w-4xl mx-auto px-4 py-8">
+  <!-- Article Header -->
+  <article class="mb-12">
+    <header class="mb-8 pb-6 border-b border-ctp-surface1">
+      <h1 class="text-4xl md:text-5xl font-bold text-ctp-text mb-4 leading-tight"><%= @article.title %></h1>
+      <div class="flex items-center text-ctp-subtext1">
+        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path>
+        </svg>
+        <time><%= @article.created_at&.strftime("%B %d, %Y") %></time>
+      </div>
+    </header>
+    
+    <div class="prose prose-lg max-w-none prose-ctp mb-12">
+      <%= simple_format(@article.body) %>
+    </div>
+  </article>
 
-  <div class="prose lg:prose-xl mb-8">
-    <%= @article.body %>
-  </div>
+  <!-- Comments Section -->
+  <section class="mb-12">
+    <div class="flex items-center mb-6">
+      <h2 class="text-2xl font-bold text-ctp-text mr-4">Comments</h2>
+      <span class="bg-ctp-surface0 text-ctp-subtext1 px-3 py-1 rounded-full text-sm font-medium"><%= @article.comments.count %></span>
+    </div>
+    
+    <div class="space-y-6 mb-8">
+      <% if @article.comments.any? %>
+        <% @article.comments.each do |comment| %>
+          <div class="bg-ctp-surface0 border border-ctp-surface1 p-6 rounded-xl hover:bg-ctp-surface1 transition-colors duration-200">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0">
+                <div class="w-10 h-10 bg-gradient-to-br from-ctp-mauve to-ctp-pink rounded-full flex items-center justify-center">
+                  <span class="text-ctp-base font-bold text-sm"><%= comment.commenter.first.upcase %></span>
+                </div>
+              </div>
+              <div class="flex-1 min-w-0">
+                <div class="flex items-center mb-2">
+                  <h3 class="text-ctp-text font-semibold"><%= comment.commenter %></h3>
+                  <span class="text-ctp-subtext0 text-sm ml-2">•</span>
+                  <time class="text-ctp-subtext0 text-sm ml-2"><%= comment.created_at&.strftime("%b %d, %Y at %I:%M %p") %></time>
+                </div>
+                <p class="text-ctp-subtext1 leading-relaxed"><%= simple_format(comment.body) %></p>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <div class="text-center py-8">
+          <svg class="w-12 h-12 mx-auto text-ctp-surface2 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+          </svg>
+          <p class="text-ctp-subtext1">No comments yet. Be the first to share your thoughts!</p>
+        </div>
+      <% end %>
+    </div>
+  </section>
 
-  <h2 class="text-2xl font-semibold mb-4">Comments</h2>
-  <div class="space-y-4 mb-8">
-    <% @article.comments.each do |comment| %>
-      <div class="bg-gray-100 p-4 rounded-lg">
-        <p class="font-semibold"><%= comment.commenter %></p>
-        <p class="mt-2"><%= comment.body %></p>
+  <!-- Add Comment Form -->
+  <section class="bg-ctp-surface0 border border-ctp-surface1 rounded-xl p-6">
+    <h2 class="text-xl font-bold text-ctp-text mb-6 flex items-center">
+      <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+      </svg>
+      Add a comment
+    </h2>
+    
+    <%= form_with model: [ @article, @article.comments.build ], class: "space-y-6" do |form| %>
+      <div>
+        <%= form.label :commenter, "Your name", class: "block text-sm font-medium text-ctp-text mb-2" %>
+        <%= form.text_field :commenter, 
+            class: "w-full px-4 py-3 bg-ctp-base border border-ctp-surface2 rounded-lg text-ctp-text placeholder-ctp-subtext0 focus:border-ctp-mauve focus:ring-2 focus:ring-ctp-mauve focus:ring-opacity-20 transition-colors duration-200", 
+            placeholder: "Enter your name" %>
+      </div>
+      
+      <div>
+        <%= form.label :body, "Your comment", class: "block text-sm font-medium text-ctp-text mb-2" %>
+        <%= form.text_area :body, 
+            rows: 4, 
+            class: "w-full px-4 py-3 bg-ctp-base border border-ctp-surface2 rounded-lg text-ctp-text placeholder-ctp-subtext0 focus:border-ctp-mauve focus:ring-2 focus:ring-ctp-mauve focus:ring-opacity-20 transition-colors duration-200 resize-vertical", 
+            placeholder: "Share your thoughts..." %>
+      </div>
+      
+      <div class="flex justify-end">
+        <%= form.submit "Post Comment", 
+            class: "inline-flex items-center px-6 py-3 bg-ctp-mauve text-ctp-base font-medium rounded-lg hover:bg-ctp-lavender focus:outline-none focus:ring-2 focus:ring-ctp-mauve focus:ring-offset-2 focus:ring-offset-ctp-surface0 transition-colors duration-200" %>
       </div>
     <% end %>
-  </div>
+  </section>
 
-  <h2 class="text-2xl font-semibold mb-4">Add a comment:</h2>
-  <%= form_with model: [ @article, @article.comments.build ], class: "space-y-4" do |form| %>
-    <div>
-      <%= form.label :commenter, class: "block text-sm font-medium text-gray-700" %>
-      <%= form.text_field :commenter, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
-    </div>
-    <div>
-      <%= form.label :body, class: "block text-sm font-medium text-gray-700" %>
-      <%= form.text_area :body, rows: 4, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50" %>
-    </div>
-    <div>
-      <%= form.submit class: "inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" %>
-    </div>
-  <% end %>
+  <!-- Back to Articles -->
+  <div class="mt-8 pt-6 border-t border-ctp-surface1">
+    <%= link_to root_path, class: "inline-flex items-center text-ctp-mauve hover:text-ctp-lavender transition-colors duration-200" do %>
+      <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+      Back to all articles
+    <% end %>
+  </div>
 </div>
