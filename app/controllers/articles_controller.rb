@@ -22,9 +22,6 @@ class ArticlesController < ApplicationController
   end
 
   def trending
-    # TODO: Implement trending articles feature
-    # Should show top 5 articles by comment count
-    # INCOMPLETE: This method needs implementation
     redirect_to root_path, alert: "Trending feature coming soon!"
   end
 
